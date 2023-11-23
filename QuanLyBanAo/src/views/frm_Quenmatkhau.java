@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import models.Users;
 import services.IUsersService;
 import services.imp.UsersService;
-import viewmodels.UsersViewmodel;
+import viewsmodel.UsersViewmodel;
 
 /**
  *
