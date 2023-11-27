@@ -90,7 +90,136 @@ public class frm_Sanpham extends javax.swing.JPanel {
 
     }
 
+public void initcbo() {
+        List<NSX> listnsx = iNSXServices.getAll();
+        cbo_nsx.setModel(new DefaultComboBoxModel(listnsx.toArray()));
 
+        List<MauSac> listms = iMauSacServices.getAll();
+        cbo_mausac.setModel(new DefaultComboBoxModel(listms.toArray()));
+
+        List<DanhMucSP> listdmsp = iDanhMucSPServices.getAll();
+        cbo_danhmuc.setModel(new DefaultComboBoxModel(listdmsp.toArray()));
+
+        List<KichCo> listkc = iKichCoServices.getAll();
+        cbo_size.setModel(new DefaultComboBoxModel(listkc.toArray()));
+
+        List<ChatLieu> listcl = iChatLieuServices.getAll();
+        cbo_chatlieu.setModel(new DefaultComboBoxModel(listcl.toArray()));
+
+        List<ThuongHieu> listth = iThuongHieuServices.getAll();
+        cbo_thuonghieu1.setModel(new DefaultComboBoxModel(listth.toArray()));
+
+    }
+
+    private int getindexmausac(ChiTietSPViewModel x) {
+        List<MauSac> lst = iMauSacServices.getAll();
+        int index = -1;
+        for (int i = 0; i < lst.size(); i++) {
+            if (lst.get(i).getId() == x.getMausac().getId()) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    private void xuatbarcode(ChiTietSPViewModel x) {
+        System.out.println(x.toString());
+        try {
+            Linear barcode = new Linear();
+            barcode.setType(Linear.CODE128B);
+            barcode.setData(x.getQrcode());
+            barcode.setI(11.0f);
+            barcode.renderBarcode("D:\\QLBanGiay-main\\HoaDon//" + x.getTen() + ".png");
+            System.out.println("xuất thành công");
+        } catch (Exception e) {
+            System.out.println("xuất thất bại");
+        }
+    }
+
+    public static void generateQRcode(String data, String path, Map map, int h, int w) {
+        try {
+            BitMatrix matrix = new MultiFormatWriter().encode(new String(data.getBytes("UTF-8"), "UTF-8"), BarcodeFormat.QR_CODE, w, h);
+            MatrixToImageWriter.writeToFile(matrix, path.substring(path.lastIndexOf('.') + 1), new File(path));
+        } catch (Exception ex) {
+            Logger.getLogger(frm_Sanpham.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private int getindexnsx(ChiTietSPViewModel x) {
+        List<NSX> lst = iNSXServices.getAll();
+        int index = -1;
+        for (int i = 0; i < lst.size(); i++) {
+            if (lst.get(i).getId() == x.getNsx().getId()) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    private int getindexdanhmuc(ChiTietSPViewModel x) {
+        List<DanhMucSP> lst = iDanhMucSPServices.getAll();
+        int index = -1;
+        for (int i = 0; i < lst.size(); i++) {
+            if (lst.get(i).getId() == x.getDanhmuc().getId()) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    private int getindexsize(ChiTietSPViewModel x) {
+        List<KichCo> lst = iKichCoServices.getAll();
+        int index = -1;
+        for (int i = 0; i < lst.size(); i++) {
+if (lst.get(i).getId() == x.getKichco().getId()) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    private int getindexthuonghieu(ChiTietSPViewModel x) {
+        List<ThuongHieu> lst = iThuongHieuServices.getAll();
+        int index = -1;
+        for (int i = 0; i < lst.size(); i++) {
+            if (lst.get(i).getId() == x.getThuonghieu().getId()) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    private int getindexchatlieu(ChiTietSPViewModel x) {
+        List<ChatLieu> lst = iChatLieuServices.getAll();
+        int index = -1;
+        for (int i = 0; i < lst.size(); i++) {
+            if (lst.get(i).getId() == x.getChatlieu().getId()) {
+                index = i;
+            }
+        }
+        return index;
+
+    }
+
+    private String zenbarcode() {
+        Random random = new Random();
+        int ran = random.nextInt(999999);
+        int dom = random.nextInt(999999);
+        return ran + "" + dom;
+    }
+
+    private ChiTietSPViewModel getdadtafrom() {
+        Pattern p = Pattern.compile("^[0-9]+$");
+        if (txt_ma.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã sản phẩm!");
+            return null;
+
+        }
+        if (txt_ma.getText().length() > 15) {
+            JOptionPane.showMessageDialog(this, "Mã sản phẩm không quá 15 kí tự!");
+            return null;
+        }
 //  tên sp
         if (txt_ten.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên sản phẩm!");
