@@ -416,7 +416,9 @@ public class frm_Thongke extends javax.swing.JPanel {
         CategoryPlot categoryPlot = new CategoryPlot();
         categoryPlot.setRangeGridlinePaint(Color.BLACK);
         ChartFrame chartFrame = new ChartFrame("Biều đồ", barChart);
-        
+        chartFrame.setVisible(true);
+        chartFrame.setSize(1000, 500);
+        chartFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_bieudoActionPerformed
 
     private void rd_khoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_khoangActionPerformed
