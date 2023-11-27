@@ -396,29 +396,7 @@ public class frm_Thongke extends javax.swing.JPanel {
     }//GEN-LAST:event_rd_namActionPerformed
 
     private void btn_bieudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bieudoActionPerformed
-        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(repository.getmonth1(), "VND", "1");
-        dataset.addValue(repository.getmonth2(), "VND", "2");
-        dataset.addValue(repository.getmonth3(), "VND", "3");
-        dataset.addValue(repository.getmonth4(), "VND", "4");
-        dataset.addValue(repository.getmonth5(), "VND", "5");
-        dataset.addValue(repository.getmonth6(), "VND", "6");
-        dataset.addValue(repository.getmonth7(), "VND", "7");
-        dataset.addValue(repository.getmonth8(), "VND", "8");
-        dataset.addValue(repository.getmonth9(), "VND", "9");
-        dataset.addValue(repository.getmonth10(), "VND", "10");
-        dataset.addValue(repository.getmonth11(), "VND", "11");
-        dataset.addValue(repository.getmonth12(), "VND", "12");
-        JFreeChart barChart = ChartFactory.createBarChart(
-                "BIỂU ĐỒ DOANH THU",
-                "THÁNG", "VND",
-                dataset, PlotOrientation.VERTICAL, false, true, false);
-        CategoryPlot categoryPlot = new CategoryPlot();
-        categoryPlot.setRangeGridlinePaint(Color.BLACK);
-        ChartFrame chartFrame = new ChartFrame("Biều đồ", barChart);
-        chartFrame.setVisible(true);
-        chartFrame.setSize(1000, 500);
-        chartFrame.setLocationRelativeTo(null);
+        
     }//GEN-LAST:event_btn_bieudoActionPerformed
 
     private void rd_khoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd_khoangActionPerformed
