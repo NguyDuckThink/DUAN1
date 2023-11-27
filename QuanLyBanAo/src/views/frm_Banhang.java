@@ -278,19 +278,7 @@ public class frm_Banhang extends javax.swing.JPanel implements Runnable, ThreadF
         int count = 0;
         List<HoaDonCHiTietViewModel> list = hoaDonServiec.getListHoaDonChiTiet(MaHD);
         for (HoaDonCHiTietViewModel x : list) {
-            tongTien = tongTien + x.getThanhTien();
-            lbl_tongTien1.setText(String.format("%.0f", tongTien));
-            List<SanPhamViewModel> listSanPham = sanISamPhamServiecs.getListSanPham();
-            if (tb_gioHang.getValueAt(count, 0).equals(x.getSanPham().getMa()) && x.getSanPham().getKhuenMai().getHinhThucKM().equals("%")) {
-                tongPT = x.getThanhTien() * x.getSanPham().getKhuenMai().getGiaTriGiam() / 100;
-                lbl_giamGia1.setText(String.valueOf(giam += tongPT));
-                lbl_giamGia1.setText(String.format("%.0f", giam));
-            } else {
-                tongVN = x.getSanPham().getKhuenMai().getGiaTriGiam() * x.getSoluong();
-                lbl_giamGia1.setText(String.valueOf(giam += tongVN));
-                lbl_giamGia1.setText(String.format("%.0f", giam));
-            }
-            count++;
+            
         }
         Double ThanhTien = Double.parseDouble(lbl_tongTien1.getText()) - Double.parseDouble(lbl_giamGia1.getText());
         lbl_thanhTien.setText(String.valueOf(String.format("%.0f", ThanhTien)));
