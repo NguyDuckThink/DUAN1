@@ -122,7 +122,14 @@ public class frm_Banhang extends javax.swing.JPanel implements Runnable, ThreadF
 
     private void inintWebCam() {
 
-      
+        Dimension size = WebcamResolution.QVGA.getSize();
+        webcam = Webcam.getWebcams().get(0);
+//        webcam.setViewSize(size);
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+        jPanel1.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 220, 150));
+        executor.execute(this);
     }
 
     private void getListSP() {
