@@ -220,7 +220,20 @@ public class frm_Banhang extends javax.swing.JPanel implements Runnable, ThreadF
     }
 
     private void getListGioHang() {
-       
+        modelGioHang = (DefaultTableModel) tb_gioHang.getModel();
+        modelGioHang.setRowCount(0);
+        for (GioHangViewModel x : listGioHang) {
+            modelGioHang.addRow(new Object[]{
+                x.getMaSP(),
+                x.getTenSP(),
+                x.getMauSac(),
+                x.getKichCo(),
+                x.getSoLuong(),
+                String.format("%.0f", x.getDonGia()),
+                String.format("%.0f", x.getGiamGia()) + " " + x.getHinhThucGiamGia(),
+                String.format("%.0f", x.getThanhTien())
+            });
+        }
     }
 
     private void getListGioHangHDCT(String MaHD) {
