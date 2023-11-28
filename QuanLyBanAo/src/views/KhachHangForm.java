@@ -76,7 +76,52 @@ public class KhachHangForm extends javax.swing.JFrame {
     }
 
     public boolean check() {
-     
+        String sdt = "(0\\d{9})";
+        String mail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        Pattern p = Pattern.compile("^[0-9]+$");
+        if (txt_Ten1.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên!");
+            return false;
+        }
+        if (p.matcher(txt_Ten1.getText()).find() == true) {
+            JOptionPane.showMessageDialog(this, "Tên của bạn không được nhập số");
+            return false;
+        } else if (txt_Ten1.getText().length() > 30) {
+            JOptionPane.showMessageDialog(this, "Tên không được quá 30 kí tự");
+            return false;
+        }
+        if (txt_sdt.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập SĐT!");
+            return false;
+        }
+        try {
+            if (!txt_sdt.getText().matches(sdt)) {
+                JOptionPane.showMessageDialog(this, "Số điện thoại của bạn chưa đúng định dạng");
+                return false;
+            }
+        } catch (Exception e) {
+        }
+        if (KH.kiemtrasdt(txt_sdt.getText()) != null) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại của bạn đã tồn tại");
+            return false;
+        }
+        if (txt_email.getText().equals("")) {
+            return true;
+        } else {
+            try {
+                if (!txt_email.getText().matches(mail)) {
+                    JOptionPane.showMessageDialog(this, "Email của bạn chưa đúng định dạng");
+                    return false;
+                }
+            } catch (Exception e) {
+            }
+        }
+        if (KH.kiemtra(txt_email.getText()) != null) {
+            JOptionPane.showMessageDialog(this, "Email đã tồn tại");
+            return false;
+        }
+
+        return true;
 
     }
 
