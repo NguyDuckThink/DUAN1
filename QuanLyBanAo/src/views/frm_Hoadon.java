@@ -26,6 +26,28 @@ public class frm_Hoadon extends javax.swing.JPanel {
 
     }
 
+    private void loatdate1() {
+       
+        defaultTableModel = (DefaultTableModel) tbl_hoadon.getModel();
+      
+        defaultTableModel.getRowCount();
+        List<HoaDonViewModel> hdv = HoaDonServiec.getAllHD();
+       
+        for (HoaDonViewModel hoaDonViewModel : hdv) {
+            
+            defaultTableModel.addRow(new Object[]{
+                hoaDonViewModel.getMa(),
+                hoaDonViewModel.getUs().getTen(),
+                hoaDonViewModel.getKh().getTen(),
+                hoaDonViewModel.getTongTien(),
+                hoaDonViewModel.getNgayTao(),
+                hoaDonViewModel.getNgayThanhToan(),
+                hoaDonViewModel.getTinhTrang() == 0 ? "Chưa thanh toán" : "Đã thanh toán",
+                hoaDonViewModel.getGhiChu(),});
+        }
+
+    }
+
     public void TKTenHoaDOn() {
 
 //        if (txt_tk.getText().isEmpty()) {
