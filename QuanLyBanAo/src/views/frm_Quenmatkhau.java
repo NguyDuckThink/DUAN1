@@ -218,7 +218,55 @@ public class frm_Quenmatkhau extends javax.swing.JPanel {
 
     private void btn_doimkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_doimkMouseClicked
         // TODO add your handling code here:
-      
+        int code = 0;
+        if (txt_email.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tài khoản!");
+            return;
+        }
+
+        if (txt_code.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã bảo mật!");
+            return;
+        }
+
+        try {
+            code = Integer.parseInt(txt_code.getText());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Mã bảo mật phải là số!");
+            return;
+        }
+
+        if (txtPass.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Mời bạn nhập mật khẩu mới!");
+            return;
+        }
+
+        if (txtPass.getText().length() < 6) {
+            JOptionPane.showMessageDialog(this, "Độ dài mật khẩu yêu cầu 6 kí tự trở lên!");
+            return;
+        }
+
+        if (txtPass1.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Mời bạn xác nhận mật khẩu mới!");
+            return;
+        }
+        if (!txtPass.getText().equals(txtPass1.getText())) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu mới và mật khẩu xác nhận chưa giống nhau!");
+            return;
+        }
+        if (ius.getUserbytk(txt_email.getText()) == null) {
+            JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại!");
+            return;
+        }
+        if (code == ran) {
+            UsersViewmodel us = new UsersViewmodel();
+            us.setMk(txtPass.getText());
+            ius.updateMK(us, txt_email.getText());
+            JOptionPane.showMessageDialog(this, "Thay đổi mật khẩu thành công");
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Sai mã bảo mật");
 //        for (int i = 0; i <= lstma.size() - 1; i++) {
 //            if (!txt_code.getText().equals(lstma.get(i))) {
 //                JOptionPane.showMessageDialog(this, "Sai mã bảo mật");
