@@ -112,10 +112,10 @@ public void initcbo() {
     }
 
     private int getindexmausac(ChiTietSPViewModel x) {
-        List<MauSac> lst = iMauSacServices.getAll();
+        List<MauSac> list = iMauSacServices.getAll();
         int index = -1;
-        for (int i = 0; i < lst.size(); i++) {
-            if (lst.get(i).getId() == x.getMausac().getId()) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId() == x.getMausac().getId()) {
                 index = i;
             }
         }
