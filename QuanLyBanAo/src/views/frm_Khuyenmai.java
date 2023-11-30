@@ -329,7 +329,40 @@ public class frm_Khuyenmai extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
-        
+        IKhuyenmaiRepository repository = new KhuyenmaiReponsitory();
+        List<KhuyenMai> lst = repository.GetAll();
+        long time = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(time);
+
+        if (JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Add", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            KhuyenmaiViewmodel km = new KhuyenmaiViewmodel();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date1 = sdf.format(date_BD.getDate());
+            String date2 = sdf.format(date_KT.getDate());
+            km.setNgayBatDau(date1);
+            km.setNgayKetThuc(date2);
+            km.setTenKM(txt_tenkm.getText());
+            if (rd_VND.isSelected()) {
+                km.setHinhThucKM("VND");
+            } else if (rd_phantram.isSelected()) {
+                km.setHinhThucKM("%");
+            }
+            km.setGiaTriGiam(Double.parseDouble(txt_giatrgiam.getText()));
+            khuyenmaiService.Add(km);
+            LoadData();
+            if (date.before(chiTietSPServices.checkngay(lst.get(lst.size() - 1).getID()))) {
+                JOptionPane.showMessageDialog(this, "khuyến mãi chưa đến ngày áp dụng vui lòng xem và chọn khuyến mãi khác");
+                return;
+            }
+            for (int i = 0; i < tb_sp.getRowCount(); i++) {
+                boolean ischeckbox = (boolean) tb_sp.getValueAt(i, 0);
+                if (ischeckbox) {
+                    System.out.println(tb_sp.getValueAt(i, 1));
+                    chiTietSPServices.Update(lst.get(lst.size() - 1).getID(), tb_sp.getValueAt(i, 1).toString());
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+        }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
