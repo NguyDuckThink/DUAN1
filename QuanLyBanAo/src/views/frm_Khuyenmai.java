@@ -327,7 +327,87 @@ public class frm_Khuyenmai extends javax.swing.JPanel {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
+        Pattern p = Pattern.compile("^[0-9]+$");
+        try {
+            if (txt_tenkm.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên khuyến mãi");
+                return;
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (date_BD.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Bạn chưa chọn ngày bắt đầu");
+                return;
+            }
+        } catch (Exception e) {
+        }
+        try {
+            if (date_KT.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Bạn chưa chọn ngày kết thúc");
+                return;
+            }
+        } catch (Exception e) {
+        }
+        try {
+            if (!rd_VND.isSelected() && !rd_phantram.isSelected()) {
+                JOptionPane.showMessageDialog(this, "Bạn chưa chọn hình thức giảm giá");
+                return;
+            }
+        } catch (Exception e) {
+        }
+
+        try {
+            if (txt_giatrgiam.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá trị giảm");
+                return;
+            }
+        } catch (Exception e) {
+        }
+
+        try {
+            Integer.valueOf(txt_giatrgiam.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giá trị giảm phải là số!");
+            return;
+        }
+
+        try {
+            if (date_KT.getDate().before(date_BD.getDate())) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc phải lớn hơn ngày bắt đầu");
+                return;
+            }
+        } catch (Exception e) {
+        }
+        if (p.matcher(txt_tenkm.getText()).find() == true) {
+            JOptionPane.showMessageDialog(this, "Tên không được nhập số");
+            return;
+        }
+        if (txt_tenkm.getText().length() > 50) {
+            JOptionPane.showMessageDialog(this, "Tên không được quá 50 kí tự");
+            return;
+        }
+        if (khuyenmaiService.checktrung(txt_tenkm.getText()) != null) {
+            JOptionPane.showMessageDialog(this, "Tên khuyến mãi đã tồn tại");
+            return;
+        }
         
+             if (rd_phantram.isSelected()) {
+            if (Integer.parseInt(txt_giatrgiam.getText().trim()) >= 100) {
+                JOptionPane.showMessageDialog(this, "Giá trị khuyến mãi phải nhỏ hơn 100% !!!");
+                return;
+            }
+        }
+             
+                 if (Integer.parseInt(txt_giatrgiam.getText().trim()) < 0) {
+                JOptionPane.showMessageDialog(this, "Giá trị khuyến mãi không được phép âm");
+                return;
+            }
+                 if (Integer.parseInt(txt_giatrgiam.getText().trim()) == 0) {
+                JOptionPane.showMessageDialog(this, "Bạn phải nhập giá trị khuyến mãi lớn hơn 0");
+                return;
+            }
         
         IKhuyenmaiRepository repository = new KhuyenmaiReponsitory();
         List<KhuyenMai> lst = repository.GetAll();
