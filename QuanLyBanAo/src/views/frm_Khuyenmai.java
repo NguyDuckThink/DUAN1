@@ -47,6 +47,7 @@ public class frm_Khuyenmai extends javax.swing.JPanel {
         khuyenmaiService.UpdateTT2();
         LoadData();
         LoadDataSP();
+        rd_VND.setSelected(true);
     }
 
     void LoadData() {
