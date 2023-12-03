@@ -625,22 +625,7 @@ public class frm_Khachhang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_LamMoiActionPerformed
 
     private void Btn_capNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_capNhatActionPerformed
-        int row = TB_bang1.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "cần chọn khách hàng để cập nhật");
-            return;
-        }
-        if (check3() && check4()) {
-            if (JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật không?") == JOptionPane.YES_OPTION) {
-                int id = layid();
-
-                JOptionPane.showMessageDialog(this, KH.update(id, getData()));
-                listKhachHang = KH.getall();
-                showTable(listKhachHang);
-                TXT_01.setText("Tổng số khách hàng là : " + listKhachHang.size());
-
-            }
-        }
+      
 
     }//GEN-LAST:event_Btn_capNhatActionPerformed
 
